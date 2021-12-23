@@ -1,0 +1,24 @@
+.container {
+    position: relative;
+    --text-color: rgba(4, 127, 235, 1);
+}
+
+.background-image {
+    background-color: #cccccc;
+    width: 100%;
+}
+
+.call-to-action {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+}
+
+.call-to-action h1 {
+    color: var(--text-color);
+    margin-bottom: 7%;
+}
+
+.call-to-action h2 {
+    color: var(--text-color);
+}

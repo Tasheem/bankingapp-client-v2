@@ -1,7 +1,7 @@
 .footer-container {
-    --main-color: #33343b;
+    --main-color: rgba(19, 82, 19, 0.829);
     --secondary-color: rgb(204, 204, 204);
-    --tertiary-color: rgba(31, 110, 31, 0.747);
+    --tertiary-color: rgba(4, 127, 235, 1);
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -23,12 +23,13 @@
 .footer-heading {
     display: flex;
     flex-direction: column;
+    margin-top: 5%;
     margin-left: 7%;
     margin-right: 7%;
 }
 
 .footer-heading h2 {
-    margin-bottom: 25%;
+    margin-bottom: 20%;
 }
 
 .footer-heading a {

@@ -1,6 +1,7 @@
 * {
-    --main-bg-color: #33343b;
+    --main-bg-color: rgba(19, 82, 19, 0.829);
     --text-color: rgb(204, 204, 204);
+    --secondary-color: rgba(4, 127, 235, 1);
 }
 
 #main-nav {
@@ -31,6 +32,11 @@ nav {
     color: var(--text-color);
 }
 
+.nav-item a:hover {
+    color: var(--secondary-color);
+    transition: 0.3s ease-out;
+}
+
 .account-links {
     list-style-type: none;
     display: flex;
@@ -51,17 +57,23 @@ nav {
     color: var(--text-color);
 }
 
+.account-item:not(.login-button) a:hover {
+    color: var(--secondary-color);
+    transition: 0.3s ease-out;
+}
+
 .login-button {
-    border-radius: 40%;
-    border-color: var(--main-bg-color);
+    border-style: solid;
+    border-color: rgb(107, 107, 107);
+    border-radius: 80px;
     background-color: rgba(4, 127, 235, 1);
     cursor: pointer;
 }
 
 .login-button:hover {
-    background-color: rgba(0, 91, 170, 0.8);
+    box-shadow: 0px 0px 4px 5px var(--secondary-color);
 }
 
 .login-button a {
-    color: var(--main-bg-color)
+    color: #33343b;
 }

@@ -57,7 +57,7 @@ nav {
     color: var(--text-color);
 }
 
-.account-item:not(.login-button) a:hover {
+.account-item:not(.btn) a:hover {
     color: var(--secondary-color);
     transition: 0.3s ease-out;
 }
@@ -68,6 +68,7 @@ nav {
     border-radius: 80px;
     background-color: rgba(4, 127, 235, 1);
     cursor: pointer;
+    font-size: large;
 }
 
 .login-button:hover {

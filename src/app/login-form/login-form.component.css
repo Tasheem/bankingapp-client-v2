@@ -24,7 +24,7 @@
 
 .form-group {
     display: grid;
-    margin-bottom: 8%;
+    margin-top: 8%;
     margin-left: 4%;
 }
 
@@ -47,6 +47,7 @@
 
 .login-btn {
     font-size: large;
+    margin-top: 8%;
     margin-left: 40%;
     border-style: solid;
     background-color: var(--secondary-color);
@@ -58,4 +59,15 @@
 .login-btn:hover {
     background-color: rgb(0, 102, 190);
     box-shadow: 0px 0px 4px 5px var(--secondary-color);
+}
+
+.login-btn:disabled, .login-btn[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+}
+
+.login-error-msg {
+    color: red;
+    margin-left: 2%;
 }

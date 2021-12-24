@@ -1,16 +1,18 @@
 <div class="login-container">
     <h2 class="login-heading">Online Banking Login</h2>
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label>Username</label>
-            <input type="text">
+            <input formControlName="username" type="text">
+            <small class="login-error-msg" *ngIf="isErrorUsername()">A username is required</small>
         </div>
 
         <div class="form-group">
             <label>Password</label>
-            <input type="password">
+            <input formControlName="password" type="password">
+            <small class="login-error-msg" *ngIf="isErrorPassword()">A password is required</small>
         </div>
 
-        <button class="login-btn">Log In</button>
+        <button [disabled]="isErrorUsername() || isErrorPassword()" type="submit" class="login-btn">Log In</button>
     </form>
 </div>

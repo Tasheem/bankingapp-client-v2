@@ -8,8 +8,18 @@
         </ul>
     </nav>
 
-    <ul class="account-links">
-        <li class="account-item"><a href="#">Register</a></li>
-        <li class="account-item btn"><button class="login-button"><a href="#">Log In</a></button></li>
-    </ul>
+    <div *ngIf="isLoggedIn; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <ul class="account-links">
+            <p class="greeting">Welcome, John!</p>
+            <li class="account-item btn"><button class="login-button"><a href="#">Log Out</a></button></li>
+        </ul>
+    </ng-template>
+    
+    <ng-template #elseBlock>
+        <ul class="account-links">
+            <li class="account-item"><a href="#">Register</a></li>
+            <li class="account-item btn"><button class="login-button"><a href="#">Log In</a></button></li>
+        </ul>
+    </ng-template>
 </header>

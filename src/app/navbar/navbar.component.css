@@ -78,3 +78,7 @@ nav {
 .login-button a {
     color: #33343b;
 }
+
+.greeting {
+    color: var(--text-color);
+}

@@ -1,6 +1,6 @@
 .container {
     position: relative;
-    --text-color: rgba(4, 127, 235, 1);
+    --text-color: #33343b;
 }
 
 .background-image {
@@ -10,8 +10,11 @@
 
 .call-to-action {
     position: absolute;
-    top: 20%;
-    left: 10%;
+    top: 35%;
+    left: 35%;
+    width: 20%;
+    border-style: solid;
+    background-color: #e4e3e393;
 }
 
 .call-to-action h1 {

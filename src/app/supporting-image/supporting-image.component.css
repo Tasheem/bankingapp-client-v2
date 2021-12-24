@@ -1,6 +1,7 @@
 .container {
     position: relative;
     --text-color: #33343b;
+    background-color: var(--text-color);
 }
 
 .background-image {

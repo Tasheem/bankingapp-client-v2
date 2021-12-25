@@ -83,9 +83,16 @@ export class LoginFormComponent implements OnInit {
                   
     form?.appendChild(div);
 
+    const progressBar = document.createElement('progress');
+    progressBar.style.cssText = `color: white;
+                            font-size: large;
+                            margin-top: 4%;
+                            margin-left: 25%;`
+    form?.appendChild(progressBar);
+
     // redirecting
     window.setTimeout(function() {
-        window.location.href = 'http://localhost:4200/';
+      window.location.href = 'http://localhost:4200/';
     }, 3000);
   }
 }

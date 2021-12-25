@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   public isLoggedIn = false;
+  public firstname = '';
 
   constructor() { }
 
@@ -19,9 +20,24 @@ export class NavbarComponent implements OnInit {
   // Method used to update whether a user is signed in.
   public checkStatus(): void {
     const token = window.sessionStorage.getItem('Token');
-    if(token != null)
+    if(token != null) {
       this.isLoggedIn = true;
+      const name = window.sessionStorage.getItem('Name');
+
+      if(name != null)
+        this.firstname = name;
+    }
     else
       this.isLoggedIn = false;
+  }
+
+  public logout(): void {
+    window.sessionStorage.removeItem('Token');
+    window.sessionStorage.removeItem('Name');
+
+    // redirecting
+    window.setTimeout(function() {
+        window.location.href = 'http://localhost:4200/';
+    }, 0);
   }
 }

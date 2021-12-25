@@ -11,8 +11,8 @@
     <div *ngIf="isLoggedIn; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
         <ul class="account-links">
-            <p class="greeting">Welcome, John!</p>
-            <li class="account-item btn"><button class="login-button"><a href="#">Log Out</a></button></li>
+            <p class="greeting">Welcome, {{firstname}}!</p>
+            <li (click)="logout()" class="account-item btn"><button class="login-button"><a>Log Out</a></button></li>
         </ul>
     </ng-template>
     

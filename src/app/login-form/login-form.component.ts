@@ -85,7 +85,7 @@ export class LoginFormComponent implements OnInit {
 
     // redirecting
     window.setTimeout(function() {
-        window.location.href = "http://localhost:4200/";
+        window.location.href = 'http://localhost:4200/';
     }, 3000);
   }
 }

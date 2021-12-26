@@ -62,37 +62,38 @@ export class LoginFormComponent implements OnInit {
       console.log(`Name: ${name}`); */
 
       if(token != null && name != null) {
-        window.sessionStorage.setItem('Token', token);
-        window.sessionStorage.setItem('Name', name);
+        // Send user feedback
+        const form = document.getElementById('login-form');
+        const button = document.getElementsByClassName('login-btn')[0] as HTMLElement;
+        button.style.display = 'none';
+    
+        const div = document.createElement('div');
+        div.innerHTML = 'Logging In...';
+        div.style.cssText = `color: white;
+                      font-size: large;
+                      margin-top: 8%;
+                      margin-left: 40%;`
+                      
+        form?.appendChild(div);
+    
+        const progressBar = document.createElement('progress');
+        progressBar.style.cssText = `color: white;
+                                font-size: large;
+                                margin-top: 4%;
+                                margin-left: 25%;`
+        form?.appendChild(progressBar);
+    
+        // redirecting
+        window.setTimeout(function() {
+          window.sessionStorage.setItem('Token', token);
+          window.sessionStorage.setItem('Name', name);
+          window.location.href = 'http://localhost:4200/';
+        }, 3000);
+        
       } else {
         console.error('Null token or name');
       }
     });
 
-    // Send user feedback
-    const form = document.getElementById('login-form');
-    const button = document.getElementsByClassName('login-btn')[0] as HTMLElement;
-    button.style.display = 'none';
-
-    const div = document.createElement('div');
-    div.innerHTML = 'Logging In...';
-    div.style.cssText = `color: white;
-                  font-size: large;
-                  margin-top: 8%;
-                  margin-left: 40%;`
-                  
-    form?.appendChild(div);
-
-    const progressBar = document.createElement('progress');
-    progressBar.style.cssText = `color: white;
-                            font-size: large;
-                            margin-top: 4%;
-                            margin-left: 25%;`
-    form?.appendChild(progressBar);
-
-    // redirecting
-    window.setTimeout(function() {
-      window.location.href = 'http://localhost:4200/';
-    }, 3000);
   }
 }

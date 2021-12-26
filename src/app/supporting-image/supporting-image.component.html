@@ -4,5 +4,5 @@
         <h1>Create an account to start banking</h1>
         <h2>Or use the form to login &#8594;</h2>
     </div>
-    <login-form></login-form>
+    <login-form *ngIf="!isLoggedIn()"></login-form>
 </div>

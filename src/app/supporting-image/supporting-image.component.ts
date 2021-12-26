@@ -12,4 +12,12 @@ export class SupportingImageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public isLoggedIn(): boolean {
+    const token = window.sessionStorage.getItem('Token');
+
+    if(token == null)
+      return false;
+    
+    return true;
+  }
 }

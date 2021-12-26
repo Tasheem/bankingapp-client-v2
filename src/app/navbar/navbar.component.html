@@ -1,5 +1,6 @@
 <header id="main-nav">
-    <img src="/assets/images/abstract-arrow-with-pages-5603ld.png" alt="logo">
+    <hamburger-menu *ngIf="isLoggedIn"></hamburger-menu>
+    <img [class.push-right]="isLoggedIn" src="/assets/images/abstract-arrow-with-pages-5603ld.png" alt="logo">
     <nav>
         <ul class="nav-links">
             <li class="nav-item"><a href="#">Home</a></li>

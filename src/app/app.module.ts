@@ -9,6 +9,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     SupportingImageComponent,
     LoginFormComponent,
-    FooterComponent
+    FooterComponent,
+    HamburgerMenuComponent
   ],
   imports: [
     BrowserModule,

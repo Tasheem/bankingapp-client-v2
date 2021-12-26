@@ -10,6 +10,10 @@
     display: flex;
 }
 
+.push-right {
+    margin-left: 8%;
+}
+
 nav {
     width: 50%;
 }
@@ -66,17 +70,18 @@ nav {
     border-style: solid;
     border-color: rgb(107, 107, 107);
     border-radius: 80px;
-    background-color: rgba(4, 127, 235, 1);
+    background-color: rgb(1, 47, 87);
     cursor: pointer;
     font-size: large;
 }
 
 .login-button:hover {
-    box-shadow: 0px 0px 4px 5px var(--secondary-color);
+    background-color: rgb(0, 102, 190);
+    box-shadow: 0px 0px 4px 5px rgb(1, 47, 87);
 }
 
 .login-button a {
-    color: #33343b;
+    color: #ffffff;
 }
 
 .greeting {

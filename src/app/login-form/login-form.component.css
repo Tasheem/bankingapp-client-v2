@@ -1,6 +1,6 @@
 .login-container {
     --main-color: #33343b;
-    --secondary-color: rgba(4, 127, 235, 1);
+    --secondary-color: rgb(1, 47, 87);
     position: absolute;
     top: 25%;
     right: 10%;
@@ -52,7 +52,7 @@
     border-style: solid;
     background-color: var(--secondary-color);
     border-radius: 80px;
-    color: var(--main-color);
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 

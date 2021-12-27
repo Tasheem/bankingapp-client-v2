@@ -1,8 +1,18 @@
 <div class="container">
     <img src="../../assets/images/bank-logo.jpeg" class="background-image">
-    <div class="call-to-action">
+    <div *ngIf="!userLoggedIn" class="call-to-action">
         <h1>Create an account to start banking</h1>
         <h2>Or use the form to login &#8594;</h2>
     </div>
-    <login-form *ngIf="!isLoggedIn()"></login-form>
+    <login-form *ngIf="!userLoggedIn"></login-form>
+
+    <div *ngIf="userLoggedIn" class="balance-container">
+        <span class="balance-heading">Balance</span>
+        <div class="separator-vertical"></div>
+        <div class="separator-horizontal"></div>
+        <span class="acc-heading">Account #</span>
+        
+        <div class="balance-val"></div>
+        <div class="acc-val"></div>
+    </div>
 </div>

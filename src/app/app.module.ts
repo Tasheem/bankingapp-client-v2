@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.componen
     SupportingImageComponent,
     LoginFormComponent,
     FooterComponent,
-    HamburgerMenuComponent
+    HamburgerMenuComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,

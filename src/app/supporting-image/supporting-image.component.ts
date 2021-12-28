@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CheckingService } from '../checking.service';
+import { CheckingService } from '../services/checking.service';
 import { ICheckingAccount } from '../models/checking-account';
 
 @Component({

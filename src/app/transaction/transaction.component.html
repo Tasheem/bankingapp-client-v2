@@ -1,0 +1,16 @@
+<div class="transaction-container">
+    <h2 class="transaction-heading">{{ identity }} Transactions</h2>
+    <div class="heading-separator"></div>
+    <table class="transaction-table">
+        <tr>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        <tr *ngFor="let transaction of transactions">
+            <td>${{ transaction.amount }}</td>
+            <td>{{ transaction.category | titlecase }}</td>
+            <td>{{ transaction.description }}</td>
+        </tr>
+    </table>
+</div>

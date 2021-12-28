@@ -1,7 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginService } from '../login.service';
+import { LoginService } from '../services/login.service';
 import { User } from '../models/user';
 
 @Component({

@@ -84,3 +84,23 @@
     right: 7%;
     font-size: 30px;
 }
+
+.transaction-btn {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    border-style: solid;
+    border-color: rgb(107, 107, 107);
+    border-radius: 80px;
+    background-color: rgba(1, 47, 87, 0.787);
+    cursor: pointer;
+    font-size: xx-large;
+    width: 400px;
+    height: 200px;
+    color: #ffffff;
+}
+
+.transaction-btn:hover {
+    background-color: rgb(0, 102, 190);
+    box-shadow: 0px 0px 4px 5px rgb(1, 47, 87);
+}

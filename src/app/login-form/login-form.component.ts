@@ -47,7 +47,7 @@ export class LoginFormComponent implements OnInit {
       return;
     }
 
-    console.log(`Username: ${username?.value}\nPassword: ${password?.value}`);
+    // console.log(`Username: ${username?.value}\nPassword: ${password?.value}`);
 
     // Send http request for login
     this.loginService

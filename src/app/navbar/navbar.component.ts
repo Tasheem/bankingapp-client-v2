@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit {
 
   // Method used to update whether a user is signed in.
   public checkStatus(): void {
-    console.log('checkStatus() Reached!');
     const token = window.sessionStorage.getItem('Token');
     if(token != null) {
       this.isLoggedIn = true;

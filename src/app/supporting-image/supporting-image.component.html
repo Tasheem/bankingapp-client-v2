@@ -5,6 +5,120 @@
         <h2>Or use the form to login &#8594;</h2>
     </div>
     <login-form *ngIf="!userLoggedIn"></login-form>
+    
+    <div *ngIf="userLoggedIn" id="first-name-card"  
+    class="cards">
+        <div id="first-name-heading" class="headings">
+            First Name
+        </div>
+        <div id="fn-separator" class="separators"></div>
+        <button (click)="editBounded($event)" id="fn-btn" 
+        class="card-buttons">
+            Edit
+        </button>
+        <div id="fn-flex-container" class="value-containers">
+            <div id="first-name-val" class="profile-values">
+                John
+            </div>
+        </div>
+        <input type="text" id="fn-field" class="field-boxes">
+    </div>
+
+    <div *ngIf="userLoggedIn" id="last-name-card" 
+    class="cards">
+        <div id="last-name-heading" class="headings">
+            Last Name
+        </div>
+        <div id="ln-separator" class="separators"></div>
+        <button (click)="editBounded($event)" id="ln-btn" 
+        class="card-buttons">
+            Edit
+        </button>
+        <div id="ln-flex-container" class="value-containers">
+            <div id="last-name-value" class="profile-values">
+                Doe
+            </div>
+        </div>
+        <input type="text" id="ln-field" class="field-boxes">
+    </div>
+
+    <div *ngIf="userLoggedIn" id="email-card" 
+    class="cards">
+        <div id="email-heading" class="headings">
+            Email
+        </div>
+        <div id="email-separator" class="separators"></div>
+        <button (click)="editBounded($event)" id="email-btn" 
+        class="card-buttons">
+            Edit
+        </button>
+        <div id="email-flex-container" class="value-containers">
+            <div id="email-value" class="profile-values">
+                tasheem_hargrove18@yahoo.com
+            </div>
+        </div>
+        <input type="text" id="email-field" class="field-boxes">
+    </div>
+
+    <div *ngIf="userLoggedIn" id="bday-card" 
+    class="cards">
+        <div id="bday-heading" class="headings">
+            Birthday
+        </div>
+        <div id="bday-separator" class="separators"></div>
+        <button (click)="editBounded($event)" id="bday-btn" 
+        class="card-buttons">
+            Edit
+        </button>
+        <div id="bday-flex-container" class="value-containers">
+            <div id="bday-value" class="profile-values">
+                11/21/1993
+            </div>
+        </div>
+        <input type="date" id="bday-field" class="field-boxes">
+    </div>
+
+    <div *ngIf="userLoggedIn" id="gender-card" 
+    class="cards">
+        <div id="gender-heading" class="headings">
+            Gender
+        </div>
+        <div id="gender-separator" class="separators"></div>
+        <button (click)="editGenderBounded()" id="gender-btn" 
+        class="card-buttons">
+            Edit
+        </button>
+        <div id="gender-flex-container" class="value-containers">
+            <div id="gender-value" class="profile-values">
+                Male
+            </div>
+        </div>
+
+        <button id="btn-female" class="radio-buttons">
+            <input type="radio" id="radio-female" value="Female">
+            <label for="radio-female">Female</label>
+        </button>
+
+        <button id="btn-male" class="radio-buttons">
+            <input type="radio" id="radio-male" value="Male">
+            <label for="radio-male">Male</label>
+        </button>
+
+        <button id="btn-custom" class="radio-buttons">
+            <input type="radio" id="radio-custom" value="Custom">
+            <label for="radio-custom">Custom</label>
+        </button>
+
+        <div class="pronoun-dropdown">
+            <select name="pronoun" id="pronoun-select">
+                <option value="Default">Pronoun</option>
+                <option value="She">She</option>
+                <option value="He">He</option>
+                <option value="They">They</option>
+            </select>
+        </div>
+        <button id="submit-gender" class="card-buttons">Submit</button>
+    </div>
 
     <div *ngIf="userLoggedIn" class="balance-container">
         <span class="balance-heading">Balance</span>
@@ -16,5 +130,5 @@
         <div class="acc-val"></div>
     </div>
 
-    <a routerLink="/transactions"><button *ngIf="userLoggedIn" class="transaction-btn">View Transactions</button></a>
+    <!-- <a routerLink="/transactions"><button *ngIf="userLoggedIn" class="transaction-btn">View Transactions</button></a> -->
 </div>

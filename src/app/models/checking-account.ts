@@ -1,7 +1,7 @@
 export interface ICheckingAccount {
     id: string;
     accountNumber: string;
-    balance: number;
+    balance: number | string;
     userID: string;
     dateCreated: string;
 }

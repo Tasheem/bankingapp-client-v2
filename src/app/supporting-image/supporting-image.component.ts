@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckingService } from '../services/checking.service';
 import { ICheckingAccount } from '../models/checking-account';
+import { User } from '../models/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'supporting-image',
@@ -15,8 +17,10 @@ export class SupportingImageComponent implements OnInit {
   public cancelBounded: (e: Event) => void;
   public editGenderBounded: () => void;
   public cancelEditGenderBounded: () => void;
+  public user: User | undefined;
 
-  constructor(private service: CheckingService) {
+  constructor(private service: CheckingService, 
+    private userService: UserService) {
     this.checkingAccount = null;
     // Bound functions: https://stackoverflow.com/questions/54129535/angular-6-add-event-handler-to-dynamically-created-html-element
     this.editBounded = this.edit.bind(this);
@@ -27,6 +31,23 @@ export class SupportingImageComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn();
+    if(this.userLoggedIn)
+      this.userInfo();
+  }
+
+  public userInfo(): void {
+    const observable = this.userService.getUser();
+
+    const observer = {
+      next: (user: User) => {
+        this.user = user;
+        console.log(this.user);
+      },
+      error: (err: Error) => console.error(err),
+      complete: () => console.log('User Info Received')
+    }
+
+    observable.subscribe(observer);
   }
 
   public editGender(): void {

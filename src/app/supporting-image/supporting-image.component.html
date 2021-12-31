@@ -18,7 +18,7 @@
         </button>
         <div id="fn-flex-container" class="value-containers">
             <div id="first-name-val" class="profile-values">
-                John
+                {{ user && user.firstName ? user.firstName : 'N/A' }}
             </div>
         </div>
         <input type="text" id="fn-field" class="field-boxes">
@@ -36,7 +36,7 @@
         </button>
         <div id="ln-flex-container" class="value-containers">
             <div id="last-name-value" class="profile-values">
-                Doe
+                {{ user && user.lastName ? user.lastName : 'N/A' }}
             </div>
         </div>
         <input type="text" id="ln-field" class="field-boxes">
@@ -54,7 +54,7 @@
         </button>
         <div id="email-flex-container" class="value-containers">
             <div id="email-value" class="profile-values">
-                tasheem_hargrove18@yahoo.com
+                {{ user && user.email ? user.email : 'N/A' }}
             </div>
         </div>
         <input type="text" id="email-field" class="field-boxes">
@@ -72,7 +72,7 @@
         </button>
         <div id="bday-flex-container" class="value-containers">
             <div id="bday-value" class="profile-values">
-                11/21/1993
+                {{ user && user.birthday ? user.birthday : 'N/A' }}
             </div>
         </div>
         <input type="date" id="bday-field" class="field-boxes">
@@ -90,7 +90,7 @@
         </button>
         <div id="gender-flex-container" class="value-containers">
             <div id="gender-value" class="profile-values">
-                Male
+                {{ user && user.gender ? user.gender : 'N/A' }}
             </div>
         </div>
 

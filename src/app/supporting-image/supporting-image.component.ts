@@ -3,6 +3,8 @@ import { CheckingService } from '../services/checking.service';
 import { ICheckingAccount } from '../models/checking-account';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+import { Observable } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'supporting-image',
@@ -18,6 +20,8 @@ export class SupportingImageComponent implements OnInit {
   public editGenderBounded: () => void;
   public cancelEditGenderBounded: () => void;
   public user: User | undefined;
+  public customGenderSelected = false;
+  public editGenderBtnClicked = false;
 
   constructor(private service: CheckingService, 
     private userService: UserService) {
@@ -35,13 +39,130 @@ export class SupportingImageComponent implements OnInit {
       this.userInfo();
   }
 
+  public radioButtonHandler(event: Event): void {
+    const target = <HTMLInputElement> event.target;
+    const parentButton = <HTMLElement> target.parentNode;
+    // Parent Element - Container which containers all the buttons
+    const card = parentButton.parentNode;
+
+    const children = card?.children;
+    const radioButtons: HTMLInputElement[] = [];
+
+    if(children) {
+      for(let i = 0; i < children.length; i++) {
+        if(children[i].className === 'radio-buttons')
+          radioButtons.push(children[i] as HTMLInputElement);
+      }
+    }
+
+    for(const radioBtn of radioButtons) {
+      const radioChildren = radioBtn.childNodes;
+      let input: HTMLInputElement | undefined;
+      if((<HTMLElement> radioChildren[0]).nodeName.toLocaleLowerCase() === 'input')
+        input = <HTMLInputElement> radioChildren[0];
+      else 
+        input = <HTMLInputElement> radioChildren[1];
+
+      if(input.id === target.id) {
+        input.checked = true;
+        if(input.id === 'radio-custom')
+          this.customGenderSelected = true;
+        else
+          this.customGenderSelected = false;
+      }
+      else
+        input.checked = false;
+    }
+    
+  }
+
+  public updateGenderHandler(): void {
+    let gender = '';
+
+    const radioButtons = Array.from(document.getElementsByClassName('radio-buttons'));
+    for(const button of radioButtons) {
+        let input: HTMLInputElement | undefined;
+
+        if((button.children[0] as HTMLElement).nodeName.toLocaleLowerCase() === 'input')
+          input = button.children[0] as HTMLInputElement;
+        else
+          input = button.children[1] as HTMLInputElement;
+
+        if(input.checked)
+          gender = input.value;
+    }
+
+    let preferredPronoun: string | null = null;
+    if(gender === 'Custom') {
+      const selectElement = <HTMLInputElement> document.getElementById('pronoun-select');
+      preferredPronoun = selectElement.value;
+    }
+
+    const observable = this.userService.updateGender(gender, preferredPronoun);
+
+    observable.subscribe({
+      next: () => {
+        this.cancelEditGender();
+        this.userInfo();
+      },
+      error: (err: Error) => console.error(err)
+    })
+  }
+
+  public updateUserKeyDownHandler(e: KeyboardEvent): void {
+    if(e.key !== 'Enter')
+      return;
+
+    const input = <HTMLInputElement> e.target;
+    const value = input.value;
+    if(value === '')
+      return;
+
+    const observable = this.userService.updateUser(input, value);
+
+    observable.subscribe({
+      next: () => { // reload view with updated data.
+        this.userInfo();
+        this.cancel(e);
+      },
+      error: (err: Error) => console.error(err)
+    })
+  }
+
+  public updateUserFocusHandler(e: FocusEvent): void {
+    const target = <HTMLInputElement> e.target;
+    const parentNode = <HTMLElement> target.parentNode;
+    const children = parentNode.children;
+
+    const btn = Array.from(children).find((child: Element) => 
+        (<HTMLElement>child).className === 'card-buttons') as HTMLElement;
+    
+    // If user hits undo button, do not send update to server.
+    if((<HTMLElement> e.relatedTarget)?.id === btn.id)
+      return;
+
+    const value = target.value;
+    if(value === '')
+      return;
+
+    const observable = this.userService.updateUser(target, value);
+
+    observable.subscribe({
+      next: () => { // reload view with updated data.
+        this.userInfo();
+        this.cancel(e);
+      },
+      error: (err: Error) => console.error(err)
+    })
+  }
+
   public userInfo(): void {
     const observable = this.userService.getUser();
 
     const observer = {
       next: (user: User) => {
         this.user = user;
-        console.log(this.user);
+        /* console.log(this.user); */
       },
       error: (err: Error) => console.error(err),
       complete: () => console.log('User Info Received')
@@ -52,16 +173,7 @@ export class SupportingImageComponent implements OnInit {
 
   public editGender(): void {
     const editBtn = document.querySelector('#gender-btn') as HTMLElement;
-    const genderCard = document.querySelector('#gender-card') as HTMLElement;
-
-    const children = genderCard.childNodes;
-    children.forEach((child) => {
-      const element = child as HTMLElement;
-      if(element.id === 'gender-flex-container')
-        element.style.display = 'none'
-      else
-        element.style.display = 'block'
-    });
+    this.editGenderBtnClicked = true;
 
     if(editBtn.removeAllListeners)
       editBtn.removeAllListeners();
@@ -72,21 +184,8 @@ export class SupportingImageComponent implements OnInit {
 
   public cancelEditGender(): void {
     const editBtn = document.querySelector('#gender-btn') as HTMLElement;
-    const genderCard = document.querySelector('#gender-card') as HTMLElement;
-
-    const children = genderCard.childNodes;
-    children.forEach((child) => {
-      const element = child as HTMLElement;
-      if(element.id === 'gender-flex-container')
-        element.style.display = 'flex';
-      
-      if(element.className === 'radio-buttons')
-        element.style.display = 'none';
-      else if(element.className === 'pronoun-dropdown')
-        element.style.display = 'none';
-      else if(element.id === 'submit-gender')
-        element.style.display = 'none';
-    });
+    this.editGenderBtnClicked = false;
+    this.customGenderSelected = false;
 
     if(editBtn.removeAllListeners)
       editBtn.removeAllListeners();
@@ -138,12 +237,18 @@ export class SupportingImageComponent implements OnInit {
   }
 
   public cancel(e: Event): void {
-    const editBtn = e.target as HTMLElement;
-    const card = editBtn.parentElement;
+    const card = (e.target as HTMLElement).parentElement;
     const children = card?.children;
-
-    if(children == undefined)
+    if(!children)
       return;
+
+    let editBtn = e.target as HTMLElement;
+    if(editBtn.className !== 'card-buttons') { // find edit btn
+      for(let i = 0; i < children?.length; i++) {
+          if(children[i].className === 'card-buttons')
+            editBtn = children[i] as HTMLElement;
+      }
+    }
 
     let flexContainer: HTMLElement | undefined;
     let inputField: HTMLElement | undefined;
@@ -158,7 +263,7 @@ export class SupportingImageComponent implements OnInit {
     }
 
     // Erase any input user might have entered in text field.
-    (<HTMLInputElement>inputField).value = '';
+    (<HTMLInputElement> inputField).value = '';
     // Swap display of data with display of input field.
     inputField!.style.display = 'none';
     flexContainer!.style.display = 'flex';
@@ -203,19 +308,25 @@ export class SupportingImageComponent implements OnInit {
       }
       
       if(this.checkingAccount != undefined && this.checkingAccount.balance < 0)
-      balanceVal.style.color = 'rgba(202, 4, 4, 0.795)';
+        balanceVal.style.color = 'rgba(202, 4, 4, 0.795)';
       
       if(typeof this.checkingAccount?.balance === 'string') {
         balanceVal.textContent = `${this.checkingAccount?.balance}`;
         balanceVal.style.color = 'black';
       }
-      else
-        balanceVal.textContent = `$${this.checkingAccount?.balance}`;
 
       accVal.textContent = `${this.checkingAccount?.accountNumber}`;
     }
 
-    const handleError = (error: Error) => {
+    const handleError = (e: Error) => {
+      const json = (<HttpErrorResponse> e).error as HttpErrorResponse;
+
+      // The user has to login again.
+      if(json.message?.toLowerCase() === 'the token has expired') {
+        window.sessionStorage.clear();
+        window.location.href = 'http://localhost:4200/';
+      }
+
       const checking: ICheckingAccount = {
         id: '',
         accountNumber: 'N/A',
@@ -224,7 +335,7 @@ export class SupportingImageComponent implements OnInit {
         dateCreated: ''
       }
 
-      console.error(error);
+      console.error(e);
       callback(checking);
     }
     

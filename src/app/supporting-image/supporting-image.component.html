@@ -21,7 +21,9 @@
                 {{ user && user.firstName ? user.firstName : 'N/A' }}
             </div>
         </div>
-        <input type="text" id="fn-field" class="field-boxes">
+        <input (blur)="updateUserFocusHandler($event)" 
+        (keydown)="updateUserKeyDownHandler($event)" 
+        type="text" id="fn-field" class="field-boxes">
     </div>
 
     <div *ngIf="userLoggedIn" id="last-name-card" 
@@ -39,7 +41,9 @@
                 {{ user && user.lastName ? user.lastName : 'N/A' }}
             </div>
         </div>
-        <input type="text" id="ln-field" class="field-boxes">
+        <input (blur)="updateUserFocusHandler($event)" 
+        (keydown)="updateUserKeyDownHandler($event)"
+        type="text" id="ln-field" class="field-boxes">
     </div>
 
     <div *ngIf="userLoggedIn" id="email-card" 
@@ -57,7 +61,9 @@
                 {{ user && user.email ? user.email : 'N/A' }}
             </div>
         </div>
-        <input type="text" id="email-field" class="field-boxes">
+        <input (blur)="updateUserFocusHandler($event)" 
+        (keydown)="updateUserKeyDownHandler($event)" 
+        type="text" id="email-field" class="field-boxes">
     </div>
 
     <div *ngIf="userLoggedIn" id="bday-card" 
@@ -75,7 +81,9 @@
                 {{ user && user.birthday ? user.birthday : 'N/A' }}
             </div>
         </div>
-        <input type="date" id="bday-field" class="field-boxes">
+        <input (blur)="updateUserFocusHandler($event)" 
+        (keydown)="updateUserKeyDownHandler($event)" 
+        type="date" id="bday-field" class="field-boxes">
     </div>
 
     <div *ngIf="userLoggedIn" id="gender-card" 
@@ -88,28 +96,28 @@
         class="card-buttons">
             Edit
         </button>
-        <div id="gender-flex-container" class="value-containers">
+        <div *ngIf="!editGenderBtnClicked" id="gender-flex-container" class="value-containers">
             <div id="gender-value" class="profile-values">
-                {{ user && user.gender ? user.gender : 'N/A' }}
+                {{ user && user.gender ? ((user.gender === 'CUSTOM' ? user.preferredPronoun : user.gender) | titlecase ) : 'N/A' }}
             </div>
         </div>
 
-        <button id="btn-female" class="radio-buttons">
-            <input type="radio" id="radio-female" value="Female">
+        <button *ngIf="editGenderBtnClicked" id="btn-female" class="radio-buttons">
+            <input (click)="radioButtonHandler($event)" type="radio" id="radio-female" value="Female">
             <label for="radio-female">Female</label>
         </button>
 
-        <button id="btn-male" class="radio-buttons">
+        <button *ngIf="editGenderBtnClicked" (click)="radioButtonHandler($event)" id="btn-male" class="radio-buttons">
             <input type="radio" id="radio-male" value="Male">
             <label for="radio-male">Male</label>
         </button>
 
-        <button id="btn-custom" class="radio-buttons">
+        <button *ngIf="editGenderBtnClicked" (click)="radioButtonHandler($event)" id="btn-custom" class="radio-buttons">
             <input type="radio" id="radio-custom" value="Custom">
             <label for="radio-custom">Custom</label>
         </button>
 
-        <div class="pronoun-dropdown">
+        <div *ngIf="customGenderSelected && editGenderBtnClicked" class="pronoun-dropdown">
             <select name="pronoun" id="pronoun-select">
                 <option value="Default">Pronoun</option>
                 <option value="She">She</option>
@@ -117,7 +125,7 @@
                 <option value="They">They</option>
             </select>
         </div>
-        <button id="submit-gender" class="card-buttons">Submit</button>
+        <button (click)="updateGenderHandler()" *ngIf="editGenderBtnClicked" id="submit-gender" class="card-buttons">Submit</button>
     </div>
 
     <div *ngIf="userLoggedIn" class="balance-container">
@@ -126,8 +134,13 @@
         <div class="separator-horizontal"></div>
         <span class="acc-heading">Account #</span>
         
-        <div class="balance-val"></div>
-        <div class="acc-val"></div>
+        <div class="balance-val-flex-container">
+            <div class="balance-val">{{ checkingAccount?.balance | currency }}</div>
+        </div>
+
+        <div class="acc-val-flex-container">
+            <div class="acc-val"></div>
+        </div>
     </div>
 
     <!-- <a routerLink="/transactions"><button *ngIf="userLoggedIn" class="transaction-btn">View Transactions</button></a> -->

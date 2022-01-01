@@ -53,7 +53,6 @@ export class LoginFormComponent implements OnInit {
     this.loginService
     .requestLogin(new User(username?.value, password?.value))
     .subscribe(resp => {
-      console.log(`Response: ${resp}`);
       const token = resp.headers.get('Authorization');
       const name = resp.headers.get('Name');
 

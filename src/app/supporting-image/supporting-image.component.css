@@ -30,8 +30,8 @@
 }
 
 .balance-container {
-    width: 500px;
-    height: 300px;
+    width: 600px;
+    height: 400px;
     background-color: var(--app-white);
     position: absolute;
     top: 45%;
@@ -70,18 +70,34 @@
     font-size: 40px;
 }
 
-.balance-val {
+.balance-val-flex-container {
     position: absolute;
     top: 51%;
     left: 0%;
+    display: flex;
+    height: 20%;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.balance-val {
     font-size: 50px;
     color: var(--app-green);
 }
 
-.acc-val {
+.acc-val-flex-container {
     position: absolute;
-    top: 55%;
-    right: 7%;
+    top: 51%;
+    right: 0%;
+    display: flex;
+    width: 50%;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+}
+
+.acc-val {
     font-size: 30px;
 }
 
@@ -251,7 +267,6 @@
     width: 120px;
     cursor: pointer;
     bottom: 35%;
-    display: none;
 }
 
 .radio-buttons label {
@@ -280,7 +295,6 @@
     left: 35%;
     font-size: large;
     width: 90%;
-    display: none;
 }
 
 .pronoun-dropdown select {
@@ -302,7 +316,6 @@
     background-color: var(--app-green);
     width: 100px;
     height: 50px;
-    display: none;
 }
 
 #submit-gender:hover {

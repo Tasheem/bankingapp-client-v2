@@ -9,8 +9,11 @@ import { User } from '../models/user';
 export class UserService {
 
   private url = 'http://localhost:8080/bankingapp/api/user/individual';
+  private token: string | null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.token = window.sessionStorage.getItem('Token');
+  }
 
   public getUser(): Observable<User> | Observable<never> {
     const token = window.sessionStorage.getItem('Token');
@@ -20,6 +23,46 @@ export class UserService {
 
     try {
       return this.http.get<User>(this.url, {
+        headers: httpHeaders
+      });
+    } catch(err: any) {
+      return this.handleError(err);
+    }
+  }
+
+  public updateUser(target: HTMLElement, value: string): Observable<Object> {
+    let queryParam: string | undefined;
+    if(target.id === 'fn-field')
+      queryParam = 'firstname';
+    else if(target.id === 'ln-field')
+      queryParam = 'lastname';
+    else if(target.id === 'email-field')
+      queryParam = 'email';
+    else if(target.id === 'bday-field')
+      queryParam = 'birthday';
+
+    const destination = `http://localhost:8080/bankingapp/api/user?${queryParam}=${value}`;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', `${this.token}`);
+
+    try {
+      return this.http.put(destination, null, {
+        headers: httpHeaders
+      });
+    } catch(err: any) {
+      return this.handleError(err);
+    }
+  }
+
+  public updateGender(gender: string, preferredPronoun: string | null): Observable<Object> {
+    const destination = `http://localhost:8080/bankingapp/api/user?gender=${gender}&preferredPronoun=${preferredPronoun}`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', `${this.token}`);
+
+    try {
+      return this.http.put(destination, null, {
         headers: httpHeaders
       });
     } catch(err: any) {

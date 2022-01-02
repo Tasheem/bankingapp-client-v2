@@ -1,5 +1,5 @@
 <div class="container">
-    <img src="../../assets/images/bank-logo.jpeg" class="background-image">
+    <background-image></background-image>
     <div *ngIf="!userLoggedIn" class="call-to-action">
         <h1>Create an account to start banking</h1>
         <h2>Or use the form to login &#8594;</h2>
@@ -135,7 +135,7 @@
         <span class="acc-heading">Account #</span>
         
         <div class="balance-val-flex-container">
-            <div class="balance-val">{{ checkingAccount?.balance | currency }}</div>
+            <div class="balance-val">{{ checkingAccount?.balance === 'N/A' ? checkingAccount?.balance : (checkingAccount?.balance | currency) }}</div>
         </div>
 
         <div class="acc-val-flex-container">

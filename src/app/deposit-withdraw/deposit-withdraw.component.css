@@ -1,0 +1,179 @@
+.transaction-page-container {
+    --app-green: rgba(19, 82, 19, 0.829);
+    --app-white: rgb(223, 223, 223);
+    --app-blue: rgb(1, 47, 87);
+    background-color: var(--app-green);
+}
+
+.transaction-form-container {
+    width: 50%;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    border-style: solid;
+    border-color: var(--app-green);
+    background-color: var(--app-white);
+}
+
+.transaction-form-heading {
+    margin-bottom: .8em;
+    color: var(--app-green);
+}
+
+#transaction-main-heading {
+    margin-top: .5em;
+    font-size: 3em;
+}
+
+#transaction-second-heading {
+    font-size: 2em;
+    color: var(--app-blue);
+}
+
+.form-group {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 15px 0px 40px 0px;
+}
+
+.form-group label {
+    font-size: 30px;
+    margin: 8px 30px 8px 0px;
+    background-color: var(--app-blue);
+    color: var(--app-white);
+    border-style: solid;
+    border-radius: 10px;
+    padding: 0px 10px 0px 10px;
+}
+
+.form-group input {
+    width: 80%;
+    height: 55px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(197, 198, 199);
+    font-size: 1.5em;
+}
+
+.placeholder {
+    position: absolute;
+    top: 25%;
+    left: 13%;
+    font-size: 1.5em;
+    color: var(--app-green);
+    transition-property: transform font-size color;
+    transition-duration: 1.2s;
+    transition-delay: 0s;
+}
+
+.placeholder-onfocus {
+    font-size: 1em;
+    transition-property: transform font-size color;
+    transition-duration: 1.2s;
+    transition-delay: 0s;
+    transform: translateY(-15px);
+}
+
+#amount-placeholder {
+    left: 13%;
+}
+
+.transaction-radio-container {
+    width: 620px;
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.trans-radio {
+    border-style: solid;
+    color: var(--app-white);
+    border-color: rgb(107, 107, 107);
+    background-color: var(--app-blue);
+    width: 180px;
+    height: 100px;
+    cursor: pointer;
+    margin-bottom: 40px;
+    font-size: 1.5em;
+}
+
+.trans-radio input {
+    margin-right: 10px;
+    height: 2em;
+    width: 100%;
+    cursor: pointer;
+}
+
+.trans-radio label {
+    cursor: pointer;
+}
+
+.submit-transaction {
+    margin-top: 5%;
+    background-color: var(--app-green);
+    color: rgb(255, 255, 255);
+    font-size: 1.5em;
+    width: 15em;
+    height: 1.8em;
+    position: relative;
+    left: 5.5em;
+    cursor: pointer;
+}
+
+.arrow {
+    position: absolute;
+    color: var(--app-green);
+    border-style: hidden;
+    border-radius: 80px;
+    font-size: 1em;
+    transition-property: transform font-size color;
+    transition-duration: 1.2s;
+    transition-delay: 0s;
+}
+
+.arrow-onfocus {
+    font-size: .8em;
+    top: 0;
+    left: 22%;
+    color: var(--app-blue);
+    animation: up-down 1s infinite alternate;
+    animation-delay: 1.4s;
+}
+
+.arrow-onblur {
+    top: 32%;
+    left: 26.5%;
+    font-size: 1em;
+}
+
+@keyframes up-down {
+    from {
+        transform: translateY(0px) translateX(0px);
+    }
+    to {
+        transform: translateY(5px) translateX(0px);
+    }
+}
+
+.destination-arrow-onfocus {
+    font-size: .8em;
+    top: 0;
+    left: 37%;
+    color: var(--app-blue);
+    animation: up-down 1s infinite alternate;
+    animation-delay: 1.4s;
+}
+
+.destination-arrow-onblur {
+    top: 33%;
+    left: 48%;
+    font-size: 1em;
+}

@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { DepositWithdrawComponent } from './deposit-withdraw/deposit-withdraw.component';
+import { BackgroundImageComponent } from './background-image/background-image.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { TransactionComponent } from './transaction/transaction.component';
     LoginFormComponent,
     FooterComponent,
     HamburgerMenuComponent,
-    TransactionComponent
+    TransactionComponent,
+    DepositWithdrawComponent,
+    BackgroundImageComponent
   ],
   imports: [
     BrowserModule,

@@ -6,11 +6,6 @@
     background-color: var(--app-green);
 }
 
-.background-image {
-    background-color: #cccccc;
-    width: 100%;
-}
-
 .call-to-action {
     position: absolute;
     top: 35%;

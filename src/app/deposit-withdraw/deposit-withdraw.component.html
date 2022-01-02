@@ -1,0 +1,53 @@
+<div class="transaction-page-container">
+    <background-image></background-image>
+    <div class="transaction-form-container">
+        <h1 id="transaction-main-heading" class="transaction-form-heading">Perform Transaction</h1>
+        <h3 id="transaction-second-heading" class="transaction-form-heading">Please Provide The Amount And Type</h3>
+        <form [formGroup]="form" id="transaction-form">
+            <div class="form-group">
+                <input id="amount-input" type="text" name="amount" #amount
+                (focus)="handleFocus($event)" (blur)="handleBlur($event, amount.value)" 
+                formControlName="amount">
+                <span for="placeholder" id="amount-placeholder" class="placeholder"
+                [class.placeholder-onfocus]="amountInFocus || !amountFieldIsClear">
+                    Amount
+                </span>
+                <span [class.arrow-onblur]="!amountInFocus && amountFieldIsClear" 
+                [class.arrow-onfocus]="amountInFocus || !amountFieldIsClear" class="arrow">
+                    &darr;
+                </span>
+            </div>
+    
+            <div class="transaction-radio-container">
+                <button id="deposit-btn" (click)="selectRadio($event)" class="trans-radio">
+                    <input type="radio" id="radio-deposit" value="Deposit">
+                    <label for="radio-deposit">Deposit</label>
+                </button>
+                <button id="withdraw-btn" (click)="selectRadio($event)" class="trans-radio">
+                    <input type="radio" id="radio-withdraw" value="Withdraw">
+                    <label for="radio-withdraw">Withdraw</label>
+                </button>
+                <button id="send-btn" (click)="selectRadio($event)" class="trans-radio">
+                    <input type="radio" id="radio-send" value="Send">
+                    <label for="radio-send">Send</label>
+                </button>
+            </div>
+
+            <div *ngIf="isSending" class="form-group">
+                <input id="destination-input" type="text"
+                (focus)="handleFocus($event)" (blur)="handleBlur($event, destination.value)" 
+                name="destination" #destination formControlName="destination">
+                <span for="placeholder" class="placeholder" 
+                [class.placeholder-onfocus]="destinationInFocus || !destinationFieldIsClear">
+                    Destination Account #
+                </span>
+                <span [class.destination-arrow-onblur]="!destinationInFocus && destinationFieldIsClear" 
+                [class.destination-arrow-onfocus]="destinationInFocus || !destinationFieldIsClear" class="arrow">
+                    &darr;
+                </span>
+            </div>
+    
+            <button class="submit-transaction">Submit</button>
+        </form>
+    </div>
+</div>

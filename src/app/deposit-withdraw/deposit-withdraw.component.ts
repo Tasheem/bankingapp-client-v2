@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observer } from 'rxjs';
+import { ITransaction } from '../models/transaction';
+import { TransactionService } from '../services/transaction.service';
 
 @Component({
   selector: 'deposit-withdraw',
@@ -8,16 +11,18 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class DepositWithdrawComponent implements OnInit {
   public form: FormGroup;
-  public isSending;
-  public amountInFocus;
-  public amountFieldIsClear;
-  public destinationInFocus;
-  public destinationFieldIsClear;
+  public isSending: boolean;
+  public amountInFocus: boolean;
+  public amountFieldIsClear: boolean;
+  public destinationInFocus: boolean;
+  public destinationFieldIsClear: boolean;
+  public amountErrMsg: string;
+  public destinationErrMsg: string;
 
-  constructor() { 
+  constructor(private service: TransactionService) { 
     this.form = new FormGroup({
-      amount: new FormControl(),
-      destination: new FormControl()
+      amount: new FormControl('', [Validators.required]),
+      destination: new FormControl('', [Validators.required])
     })
 
     this.isSending = false;
@@ -25,9 +30,47 @@ export class DepositWithdrawComponent implements OnInit {
     this.amountFieldIsClear = true;
     this.destinationInFocus = false;
     this.destinationFieldIsClear = true;
+    this.amountErrMsg = '';
+    this.destinationErrMsg = '';
   }
 
   ngOnInit(): void {
+  }
+
+  public submitTransaction(): void {
+    const amount = <FormControl> this.form.get('amount');
+    const destination = <FormControl> this.form.get('destination');
+    let transactionCategory: 'DEPOSIT' | 'WITHDRAWAL' | 'SEND' | undefined;
+
+    const radioDeposit = <HTMLInputElement> document.getElementById('radio-deposit');
+    const radioWithdraw = <HTMLInputElement> document.getElementById('radio-withdraw');
+
+    if(radioDeposit.checked)
+      transactionCategory = 'DEPOSIT'
+    else if(radioWithdraw.checked)
+      transactionCategory = 'WITHDRAWAL'
+    else
+      transactionCategory = 'SEND'
+
+    const transaction: ITransaction = {
+      amount: amount.value,
+      category: transactionCategory
+    }
+
+    if(destination.value.length > 0)
+      transaction.destinationAccountNumber = destination.value;
+
+    const observer: Partial<Observer<string>> = {
+      next: (data: string) => console.log(data),
+      error: (err: Error) => console.error(err)
+    }
+
+    const observable = this.service.postTransaction(transaction);
+    observable.subscribe(observer);
+
+    setTimeout(() => {
+      window.location.href = 'http://localhost:4200/';
+    }, 1500)
   }
 
   private getParentBtn(element: HTMLInputElement): HTMLButtonElement {
@@ -78,15 +121,21 @@ export class DepositWithdrawComponent implements OnInit {
   public handleBlur(e: Event, inputValue: string): void {
     const target = <HTMLInputElement> e.target;
     
-    if(target.id === 'amount-input')
-      this.amountInFocus = false;
-    else
-      this.destinationInFocus = false;
-
     if(target.id === 'amount-input') {
+      this.amountInFocus = false;
       this.amountFieldIsClear = inputValue.length === 0 ? true : false;
-    } else {
+    }
+    else {
+      this.destinationInFocus = false;
       this.destinationFieldIsClear = inputValue.length === 0 ? true : false;
     }
+  }
+
+  public get amountControl(): AbstractControl | null {
+    return this.form.get('amount');
+  }
+
+  public get destinationControl(): AbstractControl | null {
+    return this.form.get('destination');
   }
 }

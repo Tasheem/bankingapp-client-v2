@@ -6,11 +6,13 @@
             <th>Amount</th>
             <th>Type</th>
             <th>Description</th>
+            <th>Date</th>
         </tr>
         <tr *ngFor="let transaction of transactions">
             <td>${{ transaction.amount }}</td>
             <td>{{ transaction.category | titlecase }}</td>
             <td>{{ transaction.description }}</td>
+            <td>{{ transaction.date | date }}</td>
         </tr>
     </table>
 </div>

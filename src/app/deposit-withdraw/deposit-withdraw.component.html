@@ -4,6 +4,7 @@
         <h1 id="transaction-main-heading" class="transaction-form-heading">Perform Transaction</h1>
         <h3 id="transaction-second-heading" class="transaction-form-heading">Please Provide The Amount And Type</h3>
         <form [formGroup]="form" id="transaction-form">
+            <small *ngIf="amountControl?.invalid && amountControl?.touched" id="amount-err">The field is required</small>
             <div class="form-group">
                 <input id="amount-input" type="text" name="amount" #amount
                 (focus)="handleFocus($event)" (blur)="handleBlur($event, amount.value)" 
@@ -33,6 +34,7 @@
                 </button>
             </div>
 
+            <small *ngIf="destinationControl?.invalid && destinationControl?.touched" id="destination-err">The field is required</small>
             <div *ngIf="isSending" class="form-group">
                 <input id="destination-input" type="text"
                 (focus)="handleFocus($event)" (blur)="handleBlur($event, destination.value)" 
@@ -47,7 +49,7 @@
                 </span>
             </div>
     
-            <button class="submit-transaction">Submit</button>
+            <button (click)="submitTransaction()" class="submit-transaction">Submit</button>
         </form>
     </div>
 </div>

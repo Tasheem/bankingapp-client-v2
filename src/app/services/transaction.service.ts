@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { ITransaction } from '../models/Transaction';
+import { ITransaction } from '../models/transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,26 @@ export class TransactionService {
       return this.http.get<ITransaction[]>(this.url, {
         headers: httpHeaders
       });
+    } catch(err: any) {
+      return this.handleError(err);
+    }
+  }
+
+  public postTransaction(transaction: ITransaction): Observable<string> {
+    const token = window.sessionStorage.getItem('Token');
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', `${token}`);
+
+    // responseType has to be of type "text" rather than type string.
+    const resType = "text";
+    const options = {
+      headers: httpHeaders,
+      responseType: resType as "text"
+    };
+    
+    try {
+      return this.http.post(this.url, transaction, options);
     } catch(err: any) {
       return this.handleError(err);
     }

@@ -1,9 +1,9 @@
 export interface ITransaction {
-    id: string,
+    id?: string,
     amount: number,
-    originAccountNumber: string,
-    destinationAccountNumber: string,
-    date: string,
-    category: string,
-    description: string
+    originAccountNumber?: string,
+    destinationAccountNumber?: string,
+    date?: string,
+    category: 'WITHDRAWAL' | 'DEPOSIT' | 'SEND',
+    description?: string
 }

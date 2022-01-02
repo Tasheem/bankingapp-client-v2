@@ -177,3 +177,15 @@
     left: 48%;
     font-size: 1em;
 }
+
+#amount-err {
+    position: relative;
+    left: 11%;
+    color: red;
+}
+
+#destination-err {
+    position: relative;
+    left: 11%;
+    color: red;
+}

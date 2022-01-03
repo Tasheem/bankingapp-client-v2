@@ -3,7 +3,7 @@ import { ITransaction } from '../models/transaction';
 import { TransactionService } from '../services/transaction.service';
 
 @Component({
-  selector: 'app-transaction',
+  selector: 'transaction',
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.css']
 })
@@ -24,9 +24,20 @@ export class TransactionComponent implements OnInit {
 
   private getTransaction(): void {
     const observable = this.service.getTransaction();
-    observable.subscribe({
-      next: (data) => this.transactions = data,
-      error: (err) => console.error(err)
-    });
+
+    const callback = (data: ITransaction[]) => {
+      const getDateTime = (date?: Date) => {
+        return date != null ? date.getTime() : 0;
+      }
+
+      this.transactions = data.sort((a: ITransaction, b: ITransaction) => getDateTime(new Date(b.date!)) - getDateTime(new Date(a.date!)));
+    }
+    
+    const observer = {
+      next: callback,
+      error: (err: Error) => console.error(err)
+    };
+    
+    observable.subscribe(observer);
   }
 }

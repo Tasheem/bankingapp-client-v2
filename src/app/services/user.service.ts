@@ -55,8 +55,12 @@ export class UserService {
     }
   }
 
-  public updateGender(gender: string, preferredPronoun: string | null): Observable<Object> {
-    const destination = `http://localhost:8080/bankingapp/api/user?gender=${gender}&preferredPronoun=${preferredPronoun}`;
+  public updateGender(gender: string, preferredPronoun: string | undefined): Observable<Object> {
+    let destination: string | undefined;
+    if(preferredPronoun === undefined)
+      destination = `http://localhost:8080/bankingapp/api/user?gender=${gender}&preferredPronoun=${null}`;
+    else
+      destination = `http://localhost:8080/bankingapp/api/user?gender=${gender}&preferredPronoun=${preferredPronoun}`;
     
     let httpHeaders = new HttpHeaders();
     httpHeaders = httpHeaders.set('Authorization', `${this.token}`);

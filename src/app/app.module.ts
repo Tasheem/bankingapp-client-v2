@@ -15,6 +15,7 @@ import { DepositWithdrawComponent } from './deposit-withdraw/deposit-withdraw.co
 import { BackgroundImageComponent } from './background-image/background-image.component';
 import { RegisterComponent } from './register/register.component';
 import { InputComponent } from './input/input.component';
+import { GenderButtonsComponent } from './gender-buttons/gender-buttons.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { InputComponent } from './input/input.component';
     DepositWithdrawComponent,
     BackgroundImageComponent,
     RegisterComponent,
-    InputComponent
+    InputComponent,
+    GenderButtonsComponent
   ],
   imports: [
     BrowserModule,

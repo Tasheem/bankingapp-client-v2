@@ -20,8 +20,9 @@ export class SupportingImageComponent implements OnInit {
   public editGenderBounded: () => void;
   public cancelEditGenderBounded: () => void;
   public user: User | undefined;
-  public customGenderSelected = false;
   public editGenderBtnClicked = false;
+  public gender: string;
+  public preferredPronoun: string | undefined;
 
   constructor(private service: CheckingService, 
     private userService: UserService) {
@@ -31,6 +32,7 @@ export class SupportingImageComponent implements OnInit {
     this.cancelBounded = this.cancel.bind(this);
     this.editGenderBounded = this.editGender.bind(this);
     this.cancelEditGenderBounded = this.cancelEditGender.bind(this);
+    this.gender = '';
   }
 
   ngOnInit(): void {
@@ -39,66 +41,16 @@ export class SupportingImageComponent implements OnInit {
       this.userInfo();
   }
 
-  public radioButtonHandler(event: Event): void {
-    const target = <HTMLInputElement> event.target;
-    const parentButton = <HTMLElement> target.parentNode;
-    // Parent Element - Container which containers all the buttons
-    const card = parentButton.parentNode;
+  public setGender(gender: string): void {
+    this.gender = gender;
+  }
 
-    const children = card?.children;
-    const radioButtons: HTMLInputElement[] = [];
-
-    if(children) {
-      for(let i = 0; i < children.length; i++) {
-        if(children[i].className === 'radio-buttons')
-          radioButtons.push(children[i] as HTMLInputElement);
-      }
-    }
-
-    for(const radioBtn of radioButtons) {
-      const radioChildren = radioBtn.childNodes;
-      let input: HTMLInputElement | undefined;
-      if((<HTMLElement> radioChildren[0]).nodeName.toLocaleLowerCase() === 'input')
-        input = <HTMLInputElement> radioChildren[0];
-      else 
-        input = <HTMLInputElement> radioChildren[1];
-
-      if(input.id === target.id) {
-        input.checked = true;
-        if(input.id === 'radio-custom')
-          this.customGenderSelected = true;
-        else
-          this.customGenderSelected = false;
-      }
-      else
-        input.checked = false;
-    }
-    
+  public setPronoun(pronoun: string | undefined): void {
+    this.preferredPronoun = pronoun;
   }
 
   public updateGenderHandler(): void {
-    let gender = '';
-
-    const radioButtons = Array.from(document.getElementsByClassName('radio-buttons'));
-    for(const button of radioButtons) {
-        let input: HTMLInputElement | undefined;
-
-        if((button.children[0] as HTMLElement).nodeName.toLocaleLowerCase() === 'input')
-          input = button.children[0] as HTMLInputElement;
-        else
-          input = button.children[1] as HTMLInputElement;
-
-        if(input.checked)
-          gender = input.value;
-    }
-
-    let preferredPronoun: string | null = null;
-    if(gender === 'Custom') {
-      const selectElement = <HTMLInputElement> document.getElementById('pronoun-select');
-      preferredPronoun = selectElement.value;
-    }
-
-    const observable = this.userService.updateGender(gender, preferredPronoun);
+    const observable = this.userService.updateGender(this.gender, this.preferredPronoun);
 
     observable.subscribe({
       next: () => {
@@ -185,7 +137,6 @@ export class SupportingImageComponent implements OnInit {
   public cancelEditGender(): void {
     const editBtn = document.querySelector('#gender-btn') as HTMLElement;
     this.editGenderBtnClicked = false;
-    this.customGenderSelected = false;
 
     if(editBtn.removeAllListeners)
       editBtn.removeAllListeners();

@@ -102,29 +102,9 @@
             </div>
         </div>
 
-        <button *ngIf="editGenderBtnClicked" id="btn-female" class="radio-buttons">
-            <input (click)="radioButtonHandler($event)" type="radio" id="radio-female" value="Female">
-            <label for="radio-female">Female</label>
-        </button>
-
-        <button *ngIf="editGenderBtnClicked" (click)="radioButtonHandler($event)" id="btn-male" class="radio-buttons">
-            <input type="radio" id="radio-male" value="Male">
-            <label for="radio-male">Male</label>
-        </button>
-
-        <button *ngIf="editGenderBtnClicked" (click)="radioButtonHandler($event)" id="btn-custom" class="radio-buttons">
-            <input type="radio" id="radio-custom" value="Custom">
-            <label for="radio-custom">Custom</label>
-        </button>
-
-        <div *ngIf="customGenderSelected && editGenderBtnClicked" class="pronoun-dropdown">
-            <select name="pronoun" id="pronoun-select">
-                <option value="Default">Pronoun</option>
-                <option value="She">She</option>
-                <option value="He">He</option>
-                <option value="They">They</option>
-            </select>
-        </div>
+        <gender-buttons *ngIf="editGenderBtnClicked" 
+        (genderChangeEvent)="setGender($event)" 
+        (pronounChangeEvent)="setPronoun($event)"></gender-buttons>
         <button (click)="updateGenderHandler()" *ngIf="editGenderBtnClicked" id="submit-gender" class="card-buttons">Submit</button>
     </div>
 

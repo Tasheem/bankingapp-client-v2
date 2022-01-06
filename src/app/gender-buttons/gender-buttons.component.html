@@ -1,0 +1,23 @@
+<button (click)="radioButtonHandler($event)" id="btn-female" class="radio-buttons">
+    <input type="radio" id="radio-female" value="Female">
+    <label for="radio-female">Female</label>
+</button>
+
+<button (click)="radioButtonHandler($event)" id="btn-male" class="radio-buttons">
+    <input type="radio" id="radio-male" value="Male">
+    <label for="radio-male">Male</label>
+</button>
+
+<button (click)="radioButtonHandler($event)" id="btn-custom" class="radio-buttons">
+    <input type="radio" id="radio-custom" value="Custom">
+    <label for="radio-custom">Custom</label>
+</button>
+
+<div *ngIf="customGenderSelected" class="pronoun-dropdown">
+    <select name="pronoun" (change)="dropdownListHandler()" id="pronoun-select">
+        <option value="Default">Pronoun</option>
+        <option value="She">She</option>
+        <option value="He">He</option>
+        <option value="They">They</option>
+    </select>
+</div>

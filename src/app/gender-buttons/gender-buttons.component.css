@@ -1,0 +1,50 @@
+.radio-buttons {
+    border-style: solid;
+    color: var(--app-white);
+    border-radius: 80px;
+    border-color: rgb(107, 107, 107);
+    background-color: var(--app-blue);
+    width: 120px;
+    cursor: pointer;
+    bottom: 35%;
+}
+
+.radio-buttons label {
+    margin-left: 6px;
+    font-size: 20px;
+}
+
+#btn-female {
+    position: absolute;
+    left: 0%;
+}
+
+#btn-male {
+    position: absolute;
+    left: 70%;
+}
+
+#btn-custom {
+    position: absolute;
+    left: 35%;
+}
+
+.pronoun-dropdown {
+    position: absolute;
+    bottom: 10%;
+    left: 35%;
+    font-size: large;
+    width: 90%;
+}
+
+.pronoun-dropdown select {
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    margin-left: 6px;
+    background-color: rgb(107, 107, 107);
+    color: var(--app-white);
+    border-style: solid;
+    border-color: rgb(107, 107, 107);
+    border-radius: 5px;
+}

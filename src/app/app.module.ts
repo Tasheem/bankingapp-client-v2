@@ -13,6 +13,8 @@ import { HamburgerMenuComponent } from './hamburger-menu/hamburger-menu.componen
 import { TransactionComponent } from './transaction/transaction.component';
 import { DepositWithdrawComponent } from './deposit-withdraw/deposit-withdraw.component';
 import { BackgroundImageComponent } from './background-image/background-image.component';
+import { RegisterComponent } from './register/register.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { BackgroundImageComponent } from './background-image/background-image.co
     HamburgerMenuComponent,
     TransactionComponent,
     DepositWithdrawComponent,
-    BackgroundImageComponent
+    BackgroundImageComponent,
+    RegisterComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,39 @@
+<div class="register-page-container">
+    <background-image></background-image>
+    <background-image></background-image>
+    
+    <div class="register-form-container">
+        <h1 class="register-heading">Register</h1>
+        <div class="register-separator"></div>
+        
+        <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <app-input *ngFor="let field of fields" [fieldName]="field"></app-input>
+    
+            <div class="radio-container">
+                <button id="btn-female" class="radio-buttons">
+                    <input type="radio" id="radio-female" value="Female">
+                    <label for="radio-female">Female</label>
+                </button>
+        
+                <button id="btn-custom" class="radio-buttons">
+                    <input type="radio" id="radio-custom" value="Custom">
+                    <label for="radio-custom">Custom</label>
+                </button>
+
+                <button id="btn-male" class="radio-buttons">
+                    <input type="radio" id="radio-male" value="Male">
+                    <label for="radio-male">Male</label>
+                </button>
+            </div>
+            
+            <select name="pronoun" id="pronoun-select">
+                <option value="Default">Pronoun</option>
+                <option value="She">She</option>
+                <option value="He">He</option>
+                <option value="They">They</option>
+            </select>
+
+            <button type="submit" class="register-btn">Register</button>
+        </form>
+    </div>
+</div>

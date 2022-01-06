@@ -1,0 +1,81 @@
+.input-comp-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#input-comp-err {
+    font-size: 1.5vmax;
+    color: red;
+    margin-left: 2%;
+}
+
+.input-comp-field {
+    width: 99%;
+    height: 100%;
+    border-radius: 80px;
+    border-style: solid;
+    border-color: rgb(197, 198, 199);
+    font-size: 3.5vh;
+    text-align: center;
+}
+
+.input-comp-placeholder-container {
+    position: absolute;
+    transition-property: left top;
+    transition-duration: 1.2s;
+    transition-delay: 0s;
+    top: 29%;
+    left: 40%;
+}
+
+.input-comp-placeholder-container-onfocus {
+    transition-property: left top;
+    transition-duration: 1.2s;
+    transition-delay: 0s;
+    left: 80%;
+    top: 34%;
+}
+
+.input-comp-placeholder {
+    font-size: 1.5em;
+    color: var(--app-green);
+    transition-property: transform font-size color;
+    transition-duration: 1.2s;
+    transition-delay: 0s;
+}
+
+.input-comp-placeholder-onfocus {
+    font-size: 1.2em;
+    transition-property: transform font-size color;
+    transition-duration: 1.2s;
+    transition-delay: 0s;
+    transform: translateY(-15px);
+}
+
+.input-comp-arrow {
+    position: relative;
+    color: var(--app-green);
+    border-style: hidden;
+    border-radius: 80px;
+    font-size: 1.2em;
+    top: 1px;
+    color: var(--app-green);
+    transition-property: color;
+    transition-duration: 1.2s;
+    transition-delay: 0s;
+    animation-name: moving-arrow;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes moving-arrow {
+    from {
+        left: 0%;
+    }
+
+    to {
+        left: -5%;
+    }
+}

@@ -7,17 +7,19 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  public registerForm: FormGroup
+  public registerForm: FormGroup;
   public firstNameFieldName: string;
   public lastNameFieldName: string;
-  public fields: string[]
+  public inputFields: string[];
+  public gender = '';
+  public preferredPronoun: string | undefined;
 
   constructor() { 
     this.registerForm = new FormGroup({
 
     });
 
-    this.fields = [
+    this.inputFields = [
       'First Name',
       'Last Name',
       'Email',
@@ -31,6 +33,14 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  public setGender(gender: string): void {
+    this.gender = gender;
+  }
+
+  public setPronoun(pronoun: string | undefined): void {
+    this.preferredPronoun = pronoun;
   }
 
   public onSubmit(): void {}

@@ -127,17 +127,18 @@
 }
 
 .headings {
-    position: absolute;
-    top: 18%;
+    position: relative;
+    margin-top: 35px;
+    margin-bottom: -6px;
     left: 25%;
     font-size: 40px;
     color: var(--app-green);
 }
 
 .separators {
-    position: absolute;
-    top: 37%;
+    position: relative;
     left: 25%;
+    margin-top: 0;
     width: 171px;
     height: 0px;
     border-style: dashed;
@@ -247,18 +248,20 @@
 }
 
 #gender-heading {
-    left: 35%;
+    margin-top: 48px;
+    left: 36%;
 }
 
 #gender-separator {
     width: 110px;
-    left: 35%;
+    left: 36%;
+    margin-bottom: 30px;
 }
 
 #submit-gender {
     position: absolute;
-    top: 73%;
-    right: 5%;
+    top: 68%;
+    right: 3%;
     background-color: var(--app-green);
     width: 100px;
     height: 50px;
@@ -267,7 +270,3 @@
 #submit-gender:hover {
     background-color: rgba(19, 82, 19, 1);
 }
-
-/* #gender-flex-container {
-    display: none;
-} */

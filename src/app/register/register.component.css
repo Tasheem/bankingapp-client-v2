@@ -37,56 +37,9 @@
     align-items: center;
 }
 
-.input-container {
+gender-buttons {
     width: 80%;
-    height: 50px;
-    margin-bottom: 20px;
-}
-
-.input-field {
-    position: relative;
-    top: 15%;
-    width: 99%;
-    height: 70%;
-    border-radius: 80px;
-    border-style: solid;
-    border-color: rgb(197, 198, 199);
-}
-
-#input-field {
-    position: absolute;
-    top: 30%;
-    left: 35%;
-}
-
-.radio-container {
-    width: 620px;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.radio-buttons {
-    border-style: solid;
-    color: var(--app-white);
-    border-radius: 80px;
-    border-color: rgb(107, 107, 107);
-    background-color: var(--app-blue);
-    width: 190px;
-    height: 100%;
-    cursor: pointer;
-}
-
-.radio-buttons label {
-    margin-left: 6px;
-    font-size: 20px;
-}
-
-#pronoun-select {
     margin-top: 40px;
-    font-size: x-large;
-    background-color: var(--app-white);
-    color: var(--app-green);
 }
 
 .register-btn {
@@ -96,7 +49,8 @@
     border-radius: 80px;
     color: rgb(255, 255, 255);
     cursor: pointer;
-    margin-top: 40px;
+    margin-top: 60px;
+    width: 80%;
 }
 
 .register-btn:hover {

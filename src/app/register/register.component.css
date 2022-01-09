@@ -57,6 +57,21 @@ gender-buttons {
     box-shadow: 0px 0px 5px 5px var(--app-blue);
 }
 
+.register-btn:disabled,
+.register-btn[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    box-shadow: none;
+    cursor: default;
+}
+
+.successful-submit {
+    color: var(--app-white);
+    position: absolute;
+    bottom: 18%;
+}
+
 app-input {
     width: 80%;
     height: 50px;

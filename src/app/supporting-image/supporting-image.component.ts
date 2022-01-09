@@ -261,12 +261,9 @@ export class SupportingImageComponent implements OnInit {
       if(this.checkingAccount != undefined && this.checkingAccount.balance < 0)
         balanceVal.style.color = 'rgba(202, 4, 4, 0.795)';
       
-      if(typeof this.checkingAccount?.balance === 'string') {
-        balanceVal.textContent = `${this.checkingAccount?.balance}`;
+      if(!this.checkingAccount || typeof this.checkingAccount?.balance === 'string') {
         balanceVal.style.color = 'black';
       }
-
-      accVal.textContent = `${this.checkingAccount?.accountNumber}`;
     }
 
     const handleError = (e: Error) => {

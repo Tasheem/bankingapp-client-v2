@@ -30,16 +30,10 @@ export class UserService {
     }
   }
 
-  public createUser(user: {[key: string]: string}): Observable<Object> {
-    const token = window.sessionStorage.getItem('Token');
-
-    let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.set('Authorization', `${token}`);
-
+  public createUser(user: {[key: string]: string | Date}): Observable<Object> {
+    const url = 'http://localhost:8080/bankingapp/api/user';
     try {
-      return this.http.post(this.url, user, {
-        headers: httpHeaders
-      });
+      return this.http.post(url, user);
     } catch(err: any) {
       return this.handleError(err);
     }

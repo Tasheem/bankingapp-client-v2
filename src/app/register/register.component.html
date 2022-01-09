@@ -16,7 +16,8 @@
             <gender-buttons (genderChangeEvent)="setGender($event)" 
             (pronounChangeEvent)="setPronoun($event)"></gender-buttons>
 
-            <button (click)="onSubmit()" type="button" class="register-btn">Register</button>
+            <span *ngIf="hasSubmitted" class="successful-submit">User Account Successfully Created...</span>
+            <button [disabled]="form.invalid || hasSubmitted" (click)="onSubmit()" type="button" class="register-btn">Register</button>
         </form>
     </div>
 </div>

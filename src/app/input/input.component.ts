@@ -48,7 +48,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
       else if(this.formControl.errors['email'])
         this.errorMsg = 'The email must be in the format something@email.com';
       else if(this.formControl.errors['pattern'])
-        this.errorMsg = 'Birthday must be of the format 01/01/1900';
+        this.errorMsg = 'Birthday must be of the format 1900-01-01';
       else if(this.formControl.errors['minlength'])
         this.errorMsg = `The ${this.fieldName} field must have a length of at least 3`;
       else if(this.formControl.errors['mismatch'])

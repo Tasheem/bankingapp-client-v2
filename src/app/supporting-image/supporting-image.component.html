@@ -115,11 +115,11 @@
         <span class="acc-heading">Account #</span>
         
         <div class="balance-val-flex-container">
-            <div class="balance-val">{{ checkingAccount?.balance === 'N/A' ? checkingAccount?.balance : (checkingAccount?.balance | currency) }}</div>
+            <div class="balance-val">{{ checkingAccount ? (checkingAccount?.balance === 'N/A' ? checkingAccount?.balance : (checkingAccount?.balance | currency)) : 'N/A' }}</div>
         </div>
 
         <div class="acc-val-flex-container">
-            <div class="acc-val"></div>
+            <div class="acc-val">{{ checkingAccount?.accountNumber ? checkingAccount?.accountNumber : 'N/A' }}</div>
         </div>
     </div>
 

@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   public gender = '';
   public preferredPronoun: string | undefined;
   public form: FormGroup
+  public hasSubmitted = false;
 
   constructor(private fb: FormBuilder, private userService: UserService) { 
     this.inputFields = [
@@ -30,7 +31,8 @@ export class RegisterComponent implements OnInit {
       if(currentValue === 'Email')
         result[currentValue] = ['', [Validators.required, Validators.email]];
       else if(currentValue === 'Birthday')
-        result[currentValue] = ['', [Validators.required, Validators.pattern(/((0[1-9])|(1[0-2]))\/(([0-2][1-9])|(3[0-1]))\/(19[0-9][0-9])|(20[0-2][0-9])/)]];
+        result[currentValue] = ['', [Validators.required, 
+          Validators.pattern(/((19[0-9][0-9])|(20[0-2][0-9]))-((0[1-9])|(1[0-2]))-(([0-2][0-9])|(3[0-1]))/)]];
       else if(currentValue === 'Confirm Password')
         result[currentValue] = ['', [Validators.required, matchPasswords]]
       else
@@ -84,17 +86,20 @@ export class RegisterComponent implements OnInit {
       userData[fieldName!] = value;
     });
 
-    userData['gender'] = this.gender;
+    userData['gender'] = this.gender.toUpperCase();
     
     if(this.preferredPronoun)
       userData['preferredPronoun'] = this.preferredPronoun;
 
     const observable = this.userService.createUser(userData);
     observable.subscribe({
-      next: (data) => console.log(data),
+      next: (data) => {
+        setTimeout(() => {
+          this.hasSubmitted = true;
+          window.location.href = 'http://localhost:4200/';
+        }, 1500)
+      },
       error: (err: Error) => console.error(err)
     });
-
-    console.log(userData);
   }
 }

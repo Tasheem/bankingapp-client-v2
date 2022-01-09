@@ -1,33 +1,72 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css']
+  styleUrls: ['./input.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(
+        () => InputComponent
+      ),
+      multi: true
+    }
+  ]
 })
-export class InputComponent implements OnInit {
+export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() fieldName: string | undefined;
-  public inFocus: boolean;
-  public isClear: boolean;
-  public touched: boolean;
+  @Input() fieldType: string | undefined;
+  @Input() formControl: FormControl | null = null;
+  @Input() form: FormGroup | null = null;
+  public inFocus: boolean = false;
+  public errorMsg: string;
+
+  public value: string;
+  public changed: ((value: string) => void);
+  public touched: (() => void);
 
   constructor() {
-    this.inFocus = false;
-    this.isClear = true;
-    this.touched = false;
+    this.value = '';
+    this.changed = () => {};
+    this.touched = () => {};
+    this.errorMsg = '';
   }
 
   ngOnInit(): void {
+    this.errorMsg = `The ${this.fieldName} field is required`;
   }
 
-  public handleFocus(): void {
-    this.inFocus = true;
+  public onChange(e: Event): void {
+    const value: string = (<HTMLInputElement> e.target).value;
+    this.changed(value);
+
+    if(this.formControl?.errors) {
+      if(this.formControl.errors['required'])
+        this.errorMsg = `The ${this.fieldName} field is required`;
+      else if(this.formControl.errors['email'])
+        this.errorMsg = 'The email must be in the format something@email.com';
+      else if(this.formControl.errors['pattern'])
+        this.errorMsg = 'Birthday must be of the format 01/01/1900';
+      else if(this.formControl.errors['minlength'])
+        this.errorMsg = `The ${this.fieldName} field must have a length of at least 3`;
+      else if(this.formControl.errors['mismatch'])
+        this.errorMsg = 'The passwords do not match';
+    }
   }
 
-  public handleBlur(inputValue: string): void {
-    this.inFocus = false;
-    this.isClear = inputValue.length === 0 ? true : false;
-    this.touched = true;
+  writeValue(value: string): void {
+    this.value = value;
+  }
+  registerOnChange(fn: (value: string) => void): void {
+    this.changed = fn;
+  }
+  registerOnTouched(fn: () => void): void {
+    this.touched = fn;
+  }
+
+  public setFocus(value: boolean) {
+    this.inFocus = value;
   }
 }

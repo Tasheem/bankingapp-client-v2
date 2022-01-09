@@ -13,3 +13,14 @@ export class User {
         this.password = password;
     }
 }
+
+export interface IUser {
+    username: string | undefined;
+    password: string | undefined;
+    firstName: string | undefined;
+    lastName: string | undefined;
+    email: string | undefined;
+    gender: string | undefined;
+    preferredPronoun?: string;
+    birthday: string | undefined;
+}

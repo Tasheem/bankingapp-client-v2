@@ -6,13 +6,17 @@
         <h1 class="register-heading">Register</h1>
         <div class="register-separator"></div>
         
-        <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <app-input *ngFor="let field of inputFields" [fieldName]="field"></app-input>
+        <form class="register-form" [formGroup]="form">
+            <app-input *ngFor="let field of inputFields" [formControlName]="field"
+            [fieldType]="field === 'Password' || field === 'Confirm Password' ? 'password' : 'text'" 
+            [fieldName]="field"
+            [form]="form"
+            [formControl]="getFormControl(field)"></app-input>
     
             <gender-buttons (genderChangeEvent)="setGender($event)" 
             (pronounChangeEvent)="setPronoun($event)"></gender-buttons>
 
-            <button type="submit" class="register-btn">Register</button>
+            <button (click)="onSubmit()" type="button" class="register-btn">Register</button>
         </form>
     </div>
 </div>

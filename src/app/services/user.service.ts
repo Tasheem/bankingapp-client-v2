@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { User } from '../models/user';
+import { IUser, User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,21 @@ export class UserService {
 
     try {
       return this.http.get<User>(this.url, {
+        headers: httpHeaders
+      });
+    } catch(err: any) {
+      return this.handleError(err);
+    }
+  }
+
+  public createUser(user: {[key: string]: string}): Observable<Object> {
+    const token = window.sessionStorage.getItem('Token');
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', `${token}`);
+
+    try {
+      return this.http.post(this.url, user, {
         headers: httpHeaders
       });
     } catch(err: any) {

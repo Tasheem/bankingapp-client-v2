@@ -1,17 +1,18 @@
-<small *ngIf="isClear && touched" id="input-comp-err">The {{ fieldName }} field is required</small>
+<small *ngIf="formControl?.invalid && formControl?.touched" id="input-comp-err">{{ errorMsg }}</small>
 <div class="input-comp-container">
-    <input type="text" name="userInput" #userInput
-    (focus)="handleFocus()" (blur)="handleBlur(userInput.value)"
+    <input [type]="fieldType" name="userInput" [class.input-err]="formControl?.invalid && formControl?.touched"
+    (focus)="setFocus(true)" [value]="value" (blur)="setFocus(false)"
+    (input)="onChange($event)" (blur)="touched()"
     class="input-comp-field">
 
     <div class="input-comp-placeholder-container" 
-    [class.input-comp-placeholder-container-onfocus]="inFocus || !isClear">
-        <span *ngIf="inFocus || !isClear"
-        [class.input-comp-arrow]="inFocus || !isClear" class="input-comp-arrow">
+    [class.input-comp-placeholder-container-onfocus]="inFocus || formControl?.value.length > 0">
+        <span *ngIf="inFocus || formControl?.value.length > 0"
+        [class.input-comp-arrow]="inFocus || formControl?.value.length > 0" class="input-comp-arrow">
             &#8592;
         </span>
         <span class="input-comp-placeholder"
-        [class.input-comp-placeholder-onfocus]="inFocus || !isClear">
+        [class.input-comp-placeholder-onfocus]="inFocus || formControl?.value.length > 0">
             {{ fieldName }}
         </span>
     </div>

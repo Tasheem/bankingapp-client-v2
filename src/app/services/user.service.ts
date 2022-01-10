@@ -64,6 +64,21 @@ export class UserService {
     }
   }
 
+  public updateUsername(username: string): Observable<Object> {
+    let URI = `http://localhost:8080/bankingapp/api/user?username=${username}`;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', `${this.token}`);
+
+    try {
+      return this.http.put(URI, null, {
+        headers: httpHeaders
+      });
+    } catch(err: any) {
+      return this.handleError(err);
+    }
+  }
+
   public updateGender(gender: string, preferredPronoun: string | undefined): Observable<Object> {
     let destination: string | undefined;
     if(preferredPronoun === undefined)

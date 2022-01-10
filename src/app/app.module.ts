@@ -17,6 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { InputComponent } from './input/input.component';
 import { GenderButtonsComponent } from './gender-buttons/gender-buttons.component';
 import { CheckingFormComponent } from './checking-form/checking-form.component';
+import { UsernameFormComponent } from './username-form/username-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CheckingFormComponent } from './checking-form/checking-form.component';
     RegisterComponent,
     InputComponent,
     GenderButtonsComponent,
-    CheckingFormComponent
+    CheckingFormComponent,
+    UsernameFormComponent
   ],
   imports: [
     BrowserModule,

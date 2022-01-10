@@ -1,0 +1,19 @@
+<div class="username-page-container">
+    <background-image></background-image>
+    
+    <div class="username-form-container">
+        <h1 class="username-heading">Update Username</h1>
+        <div class="username-separator"></div>
+
+        <form class="username-form" [formGroup]="form">
+            <app-input formControlName="username"
+            fieldType="text"
+            fieldName="Username"
+            [form]="form"
+            [formControl]="getFormControl('username')"></app-input>
+    
+            <span *ngIf="hasSubmitted" class="successful-submit">Username Updated...</span>
+            <button [disabled]="form.invalid || hasSubmitted" (click)="onSubmit()" type="button" class="username-btn">Register</button>
+        </form>
+    </div>
+</div>

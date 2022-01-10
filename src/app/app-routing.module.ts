@@ -5,12 +5,14 @@ import { DepositWithdrawComponent } from './deposit-withdraw/deposit-withdraw.co
 import { RegisterComponent } from './register/register.component';
 import { SupportingImageComponent } from './supporting-image/supporting-image.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { UsernameFormComponent } from './username-form/username-form.component';
 
 const routes: Routes = [
   { path: 'transactions', component: TransactionComponent },
   { path: 'perform-transaction', component: DepositWithdrawComponent },
   { path: 'register', component: RegisterComponent },
-  {path: 'create-checking', component: CheckingFormComponent },
+  { path: 'create-checking', component: CheckingFormComponent },
+  { path: 'update-username', component: UsernameFormComponent },
   { path: '', component: SupportingImageComponent }
 ];
 

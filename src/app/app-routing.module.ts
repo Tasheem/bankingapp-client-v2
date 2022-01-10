@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CheckingFormComponent } from './checking-form/checking-form.component';
 import { DepositWithdrawComponent } from './deposit-withdraw/deposit-withdraw.component';
 import { RegisterComponent } from './register/register.component';
 import { SupportingImageComponent } from './supporting-image/supporting-image.component';
@@ -9,6 +10,7 @@ const routes: Routes = [
   { path: 'transactions', component: TransactionComponent },
   { path: 'perform-transaction', component: DepositWithdrawComponent },
   { path: 'register', component: RegisterComponent },
+  {path: 'create-checking', component: CheckingFormComponent },
   { path: '', component: SupportingImageComponent }
 ];
 

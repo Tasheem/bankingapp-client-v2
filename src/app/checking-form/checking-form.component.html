@@ -1,0 +1,26 @@
+<div class="checking-page-container">
+    <background-image></background-image>
+    
+    <div class="checking-form-container">
+        <h1 class="checking-heading">Create Checking</h1>
+        <div class="checking-separator"></div>
+
+        <form class="checking-form" [formGroup]="form">
+            <app-input formControlName="userID"
+            fieldType="text"
+            fieldName="User ID"
+            [form]="form"
+            [formControl]="getFormControl('userID')"></app-input>
+    
+    
+            <app-input formControlName="balance"
+            fieldType="number"
+            fieldName="Balance"
+            [form]="form"
+            [formControl]="getFormControl('balance')"></app-input>
+    
+            <span *ngIf="hasSubmitted" class="successful-submit">Checking Account Created...</span>
+            <button [disabled]="form.invalid || hasSubmitted" (click)="onSubmit()" type="button" class="checking-btn">Register</button>
+        </form>
+    </div>
+</div>

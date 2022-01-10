@@ -47,10 +47,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ngOnChanges(): void {
-    console.log(this.form);
-  }
-
   public setGender(gender: string): void {
     this.gender = gender;
   }

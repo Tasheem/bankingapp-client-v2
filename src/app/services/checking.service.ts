@@ -27,6 +27,23 @@ export class CheckingService {
     }
   }
 
+  public createCheckingAccount(data: { [key: string]: string }): Observable<Object> | Observable<never> {
+    const token = window.sessionStorage.getItem('Token');
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Authorization', `${token}`);
+
+    const uri = `http://localhost:8080/bankingapp/api/checking?userID=${data['userID']}&balance=${data['balance']}`;
+    try {
+      return this.http.post(uri, null, {
+        headers: httpHeaders,
+        responseType: 'text'
+      });
+    } catch(err: any) {
+      return this.handleError(err);
+    }
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     if(error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

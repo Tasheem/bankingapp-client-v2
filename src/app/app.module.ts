@@ -16,6 +16,7 @@ import { BackgroundImageComponent } from './background-image/background-image.co
 import { RegisterComponent } from './register/register.component';
 import { InputComponent } from './input/input.component';
 import { GenderButtonsComponent } from './gender-buttons/gender-buttons.component';
+import { CheckingFormComponent } from './checking-form/checking-form.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { GenderButtonsComponent } from './gender-buttons/gender-buttons.componen
     BackgroundImageComponent,
     RegisterComponent,
     InputComponent,
-    GenderButtonsComponent
+    GenderButtonsComponent,
+    CheckingFormComponent
   ],
   imports: [
     BrowserModule,
